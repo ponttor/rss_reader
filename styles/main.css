@@ -1,0 +1,31 @@
+body {
+  background: grey;
+}
+
+
+.form-group {
+  color: #404040;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  padding: 20px 30px;
+}
+
+.text-info {
+  color: #404040;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  padding: 20px 30px;
+}
+
+.form-inline {
+  color: #404040;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  display: inline-block;
+  padding: 20px 30px;
+}

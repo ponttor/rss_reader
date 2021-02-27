@@ -1,7 +1,5 @@
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
-// const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
   module: {
@@ -27,6 +25,10 @@ module.exports = {
           // compiles Sass to CSS
           loader: 'sass-loader',
         }],
+      },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

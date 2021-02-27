@@ -1,17 +1,27 @@
+import { result } from 'lodash';
 import * as yup from 'yup';
 // import { string, object } from 'yup';
-
-// const schema = object().shape({
-//   name: string().required(),
-// });
 
 const schema = yup.object().shape({
   name: yup.string().required(),
 });
 
-// check validity
+const data = {
+  name: 'ggj',
+};
+
 schema
   .isValid({
-    name: 'jimmy',
+    name: data.name,
   })
-  .then((content) => console.log(content));
+  .then((content) => {
+    console.log(content);
+  });
+
+
+
+
+// console.log(data.name);
+// console.log(schema.validateSync(data));
+
+// console.log(handle(data));
