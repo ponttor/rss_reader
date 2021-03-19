@@ -2,6 +2,9 @@ body {
   background: grey;
 }
 
+.p {
+  text-align: center;
+}
 
 .form-group {
   color: #404040;
@@ -21,7 +24,7 @@ body {
   padding: 20px 30px;
 }
 
-.form-inline {
+.h1 {
   color: #404040;
   font-weight: bold;
   font-size: 20px;

@@ -1,8 +1,8 @@
 const ru = {
   translation: {
-    validationError: 'Ошибка валидации',
-    NetError: 'Ошибка сети',
-    noRssError: 'Ссылка не содержит Rss',
+    validationError: 'Введите корректный url',
+    netError: 'Не удалось извлечь Rss, введите валидный url',
+    urlAlreadyExistError: 'Rss уже существует',
   },
 };
 

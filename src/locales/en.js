@@ -1,7 +1,8 @@
 const en = {
   translation: {
-    Error: 'Error has happened',
-    netError: 'Connection error',
+    validationError: 'Url should be valid',
+    netError: 'There is no valid Rss, plase enter correct url',
+    urlAlreadyExistError: 'Rss is already downloaded',
   },
 };
 
