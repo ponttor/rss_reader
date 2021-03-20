@@ -42,15 +42,15 @@ export default () => {
 
   let i = 0;
   const list = [];
+  const modal = document.querySelector('#modal');
   const render = ({ feeds }) => {
     if (state.urls.length === 0) {
       return;
     }
     const htmlItemsList = feeds.map((el) => `<ul>${el.items.map(({ itemTitle, itemDescription, itemLink }) => {
-      i += 1;
       const resultButtons = `<li class="list-group-item">${itemTitle}<div class="text-right"><button id = "details" data-toggle="modal" data-target="#modal" class ="btn btn-primary pull-right" data-id=${i}>Подробнее</button></div></li>`;
       list.push([itemTitle, itemDescription, itemLink]);
-
+      i += 1;
       return resultButtons;
     }).join('')}</ul>`);
 
@@ -65,6 +65,24 @@ export default () => {
     document.querySelector('.posts').innerHTML = '';
     document.querySelector('#feeds').innerHTML = htmlTitle;
     document.querySelector('.posts').innerHTML = `<h3>Posts</h3>${htmlItemsList}`;
+
+    for (let y = 0; y <= list.length - 1; y += 1) {
+      const buttonId = document.querySelector(`[data-id="${y}"]`);
+      buttonId.addEventListener('click', (e) => {
+        e.preventDefault();
+
+        document.querySelector('#readLink').setAttribute('href', `${list[y][2]}`);
+        modal.classList.remove('fade');
+        modal.style.display = 'block';
+        document.querySelector('.modal-title').textContent = list[y][0];
+        document.querySelector('.modal-body').textContent = list[y][1];
+        document.querySelector('#close').addEventListener('click', (e2) => {
+          e2.preventDefault();
+          modal.classList.add('fade');
+          modal.style.display = 'none';
+        });
+      });
+    }
   };
 
   const watchedState = onChange(state, (path, value) => {
