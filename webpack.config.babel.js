@@ -14,7 +14,7 @@ module.exports = {
         },
       },
       {
-        test: /\.(scss)$/,
+        test: /\.(scss|css)$/,
         use: [{
           // inject CSS to page
           loader: 'style-loader',
@@ -25,10 +25,6 @@ module.exports = {
           // compiles Sass to CSS
           loader: 'sass-loader',
         }],
-      },
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
       },
     ],
   },

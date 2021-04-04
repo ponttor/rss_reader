@@ -4,7 +4,6 @@
   "description": "Project 3",
   "main": "src/index.js",
   "scripts": {
-    "test": "jest --colors",
     "start": "webpack serve",
     "watch": "webpack --watch",
     "build": "NODE_ENV=production webpack",

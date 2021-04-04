@@ -6,7 +6,6 @@ plugins:
 
 env:
   node: true
-  jest: true
   browser: true
 
 parser: babel-eslint
@@ -16,5 +15,4 @@ extends:
   - 'plugin:jest/recommended'
 
 rules:
-  no-console: 0
   import/extensions: 0
