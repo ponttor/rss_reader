@@ -1,7 +1,11 @@
+import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 module.exports = {
   mode: process.env.NODE_ENV || 'development',
+  output: {
+    path: path.resolve(__dirname, 'dist/'),
+  },
   module: {
     rules: [
       {
@@ -33,6 +37,7 @@ module.exports = {
 
   plugins: [
     new HtmlWebpackPlugin({
+      title: 'RSS Reader',
       template: 'index.html',
     }),
   ],

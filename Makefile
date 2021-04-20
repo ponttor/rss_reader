@@ -1,8 +1,8 @@
-develop:
-	npx webpack serve
+start:
+	npx webpack-dev-server
 
-install:
-	npm ci
+setup:
+	npm install
 
 build:
 	rm -rf dist
@@ -11,4 +11,5 @@ build:
 lint:
 	npx eslint .
 
-.PHONY: test
+publish: 
+	npm publish --dry run
