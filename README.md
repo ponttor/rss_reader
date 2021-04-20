@@ -9,12 +9,12 @@ Rss Reader - https://rss-vert.vercel.app/
 
 ## Setup project
 
-...
-make setup
-...
+```
+$ make setup
+```
 
 ## start server
 
-...
-make start # go to localhost:8080
-...
+```
+$ make start # go to localhost:8080
+```
