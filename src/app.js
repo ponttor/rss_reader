@@ -3,13 +3,12 @@ import './_custom.scss';
 import axios from 'axios';
 import _ from 'lodash';
 import i18next from 'i18next';
-import watchState from './watcher.js';
 import parse from './parserRss.js';
-import { renderLanguage } from './render.js';
+import { renderLanguage, watchState } from './render.js';
 import resources from './locales/index.js';
 
 export default () => {
-  const schema = yup.string('validations.rss.string').url('validations.rss.url').required('validations.rss.required');
+  const schema = yup.string('NotString').url('notUrl').required('notRequired');
   const input = document.querySelector('.form-control');
   const form = document.querySelector('.rss-form');
 
@@ -23,7 +22,7 @@ export default () => {
 
   const state = {
     loadingProcess: {
-      status: '',
+      status: 'idle',
       error: null,
     },
     feeds: [],
@@ -45,7 +44,7 @@ export default () => {
 
   const validate = (url) => {
     const urls = watchedState.feeds.map((feed) => feed.url);
-    const newSchema = schema.notOneOf(urls, 'validations.rss.notOneOf');
+    const newSchema = schema.notOneOf(urls, 'theSame');
     try {
       newSchema.validateSync(url);
       watchedState.form.valid = true;
@@ -56,21 +55,20 @@ export default () => {
     }
   };
 
-  const updateValidationState = () => validate(watchedState.form.fields.url);
   const getUrlWithProxy = (url) => `https://hexlet-allorigins.herokuapp.com/raw?url=${url}&disableCache=true`;
 
   const handleInput = (e) => {
     e.preventDefault();
     watchedState.form.processState = 'filling';
     watchedState.form.fields.url = e.target.value;
-    updateValidationState();
+    validate(watchedState.form.fields.url);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     watchedState.loadingProcess.status = 'sending';
     if (watchedState.form.valid === false) {
-      watchedState.loadingProcess.status = 'failed';
+      watchedState.loadingProcess.status = 'formError';
       return;
     }
     const url = getUrlWithProxy(state.form.fields.url);
@@ -88,13 +86,13 @@ export default () => {
         watchedState.posts.unshift(...posts);
         watchedState.loadingProcess.status = 'success';
         watchedState.form.error = null;
-        watchedState.loadingProcess.status = null;
+        watchedState.loadingProcess.status = 'idle';
       })
       .catch((error) => {
         state.loadingProcess.error = error.message;
-        watchedState.loadingProcess.status = 'failed';
+        watchedState.loadingProcess.status = 'loadingError';
         watchedState.form.error = null;
-        watchedState.loadingProcess.status = null;
+        watchedState.loadingProcess.status = 'idle';
       });
   };
 

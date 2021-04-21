@@ -13,3 +13,6 @@ lint:
 
 publish: 
 	npm publish --dry run
+
+watch:
+	"webpack --watch",

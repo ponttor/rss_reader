@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import i18next from 'i18next';
+import onChange from 'on-change';
 
 const input = document.querySelector('.form-control');
 const feedback = document.querySelector('.feedback');
@@ -21,6 +22,7 @@ const renderLanguage = () => {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     el.textContent = i18next.t(`${el.dataset.i18n}`);
   });
+  document.querySelector('[name=url]').setAttribute('placeholder', i18next.t('link'));
 };
 
 const renderSendingData = () => {
@@ -32,12 +34,13 @@ const renderSendingData = () => {
 };
 
 const renderFeeds = (state) => {
-  const htmlFeeds = `<h3>${i18next.t('feeds')}</h3><ul>${state.feeds.map((feed) => {
+  const feedsContent = state.feeds.map((feed) => {
     const title = `<h3>${feed.title}</h3>`;
     const description = `<p>${feed.description}</p>`;
     const titleline = `<li class="list-group-item">${title}${description}</li>`;
     return titleline;
-  }).join('')}</ul>`;
+  }).join('');
+  const htmlFeeds = `<h3>${i18next.t('feeds')}</h3><ul>${feedsContent}</ul>`;
   document.querySelector('#feeds').innerHTML = `${htmlFeeds}`;
 };
 
@@ -45,11 +48,13 @@ const renderPosts = (state) => {
   const htmlposts = `<ul>${state.posts.map(({
     id, title, link,
   }) => {
-    const resultButtons = `<li class="list-group-item d-flex justify-content-between align-itemsstart"><a href="${link}" class="font-weight-bold" target="_blank">${title}</a><button id = "details" data-toggle="modal" data-target="#modal" class="btn btn-primary btn-sm pull-right" data-id=${id}>Подробнее</button></span></li>`;
+    const resultButtons = `<li class="list-group-item d-flex justify-content-between align-itemsstart">
+    <a href="${link}" class="font-weight-bold" target="_blank">${title}</a>
+    <button id = "details" data-toggle="modal" data-target="#modal" 
+    class="btn btn-primary btn-sm pull-right" data-id=${id}>Подробнее</button></span></li>`;
     return resultButtons;
   }).join('')}</ul>`;
   document.querySelector('.posts').innerHTML = `<h3>${i18next.t('posts')}</h3>${htmlposts}`;
-
   state.posts.forEach(({
     id, title, link, description,
   }) => {
@@ -66,7 +71,7 @@ const renderPosts = (state) => {
       fade.classList.add('modal-backdrop');
       fade.classList.add('fade');
       fade.classList.add('show');
-      document.body.append(fade);
+      document.body.appendChild(fade);
       document.querySelector('#close').addEventListener('click', (e2) => {
         e2.preventDefault();
         modal.classList.add('fade');
@@ -90,26 +95,59 @@ const renderPosts = (state) => {
   });
 };
 
-const renderError = (state) => {
+const renderFormError = (state) => {
   input.classList.add('is-invalid', true);
   feedback.classList.add('text-danger');
-  if ((state.form.error === 'validations.rss.string')
-  || (state.form.error === 'validations.rss.url')
-  || (state.form.error === 'validations.rss.required')) {
-    feedback.textContent = i18next.t('validationError');
-  } else if (state.form.error === 'validations.rss.notOneOf') {
-    feedback.textContent = i18next.t('urlAlreadyExistError');
-  } else if (state.loadingProcess.error === 'parse xml error') {
-    feedback.textContent = i18next.t('parseError');
-  } else if (state.loadingProcess.error === 'axiosError') {
-    feedback.textContent = i18next.t('netError');
-  } else {
-    feedback.textContent = i18next.t('unknownError');
-  }
+  feedback.textContent = i18next.t(`${state.form.error}`);
   button.removeAttribute('disabled');
 };
 
-export {
-  renderError, renderSendingData, renderSuccessText,
-  renderFeeds, renderPosts, renderLanguage,
+const renderLoadingError = (state) => {
+  input.classList.add('is-invalid', true);
+  feedback.classList.add('text-danger');
+  feedback.textContent = i18next.t(`${state.loadingProcess.error}`);
+  button.removeAttribute('disabled');
 };
+
+const router = (value, state) => {
+  switch (value) {
+    case 'sending':
+      renderSendingData();
+      break;
+    case 'success':
+      renderSuccessText(state);
+      break;
+    case 'formError':
+      renderFormError(state);
+      break;
+    case 'loadingError':
+      renderLoadingError(state);
+      break;
+    default:
+      break;
+  }
+};
+
+const watchState = (state) => {
+  const watchedState = onChange(state, (path, value) => {
+    switch (path) {
+      case 'loadingProcess.status':
+        router(value, state);
+        break;
+      case 'feeds': {
+        renderFeeds(state);
+        break;
+      }
+      case 'posts': {
+        renderPosts(state);
+        break;
+      }
+
+      default:
+        break;
+    }
+  });
+  return watchedState;
+};
+
+export { renderLanguage, watchState };
