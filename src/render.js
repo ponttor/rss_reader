@@ -22,7 +22,7 @@ const renderLanguage = () => {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     el.textContent = i18next.t(`${el.dataset.i18n}`);
   });
-  document.querySelector('.link').setAttribute('placeholder', i18next.t('link'));
+  input.setAttribute('placeholder', i18next.t('link'));
 };
 
 const renderSendingData = () => {

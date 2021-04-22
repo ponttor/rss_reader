@@ -2,9 +2,8 @@
 name: Node CI
 
 # Trigger the workflow on push or pull request
-on:
-  - push
-  - pull_request
+on: [push]
+
 
 jobs:
   build:
@@ -30,8 +29,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: make install
+        # Run Linter
+      - run: make lint
         # Add environment variables
         env:
           CI: true
-        # Run Linter
-      - run: make lint
+
