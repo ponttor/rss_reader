@@ -1,6 +1,3 @@
-install:
-	npm ci
-
 start:
 	npx webpack-dev-server
 
