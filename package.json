@@ -2,7 +2,7 @@
   "name": "@hexlet/code",
   "version": "1.0.0",
   "description": "Rss reader",
-  "main": "src/index.js",
+  "main": "src/init.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ponttor/frontend-project-lvl3.git"

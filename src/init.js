@@ -92,11 +92,9 @@ export default () => {
       });
   };
 
-  document.addEventListener('DOMContentLoaded', () => {
-    renderLanguage();
-    input.addEventListener('input', handleInput);
-    form.addEventListener('submit', handleSubmit);
-  });
+  renderLanguage();
+  input.addEventListener('input', handleInput);
+  form.addEventListener('submit', handleSubmit);
 
   const refreshFeeds = () => {
     const promises = watchedState.feeds.map((feed) => axios.get(getUrlWithProxy(feed.url))
