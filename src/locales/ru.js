@@ -1,6 +1,6 @@
 export default {
   translation: {
-    success: 'RSS успешно добавлен',
+    success: 'RSS успешно загружен',
     feeds: 'Фиды',
     posts: 'Посты',
     start: 'Начните читать Rss сейчас!',
