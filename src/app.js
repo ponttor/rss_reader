@@ -18,8 +18,6 @@ export default () => {
     resources,
   });
 
-  document.addEventListener('DOMContentLoaded', renderLanguage);
-
   const state = {
     loadingProcess: {
       status: 'idle',
@@ -86,18 +84,19 @@ export default () => {
         watchedState.posts.unshift(...posts);
         watchedState.loadingProcess.status = 'success';
         watchedState.form.error = null;
-        watchedState.loadingProcess.status = 'idle';
       })
       .catch((error) => {
         state.loadingProcess.error = error.message;
         watchedState.loadingProcess.status = 'loadingError';
         watchedState.form.error = null;
-        watchedState.loadingProcess.status = 'idle';
       });
   };
 
-  input.addEventListener('input', handleInput);
-  form.addEventListener('submit', handleSubmit);
+  document.addEventListener('DOMContentLoaded', () => {
+    renderLanguage();
+    input.addEventListener('input', handleInput);
+    form.addEventListener('submit', handleSubmit);
+  });
 
   const refreshFeeds = () => {
     const promises = watchedState.feeds.map((feed) => axios.get(getUrlWithProxy(feed.url))
