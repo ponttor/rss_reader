@@ -18,7 +18,7 @@ export default () => {
     resources,
   });
 
-  renderLanguage();
+  document.addEventListener('DOMContentLoaded', renderLanguage);
 
   const state = {
     loadingProcess: {
