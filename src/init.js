@@ -8,9 +8,22 @@ import { renderLanguage, watchState } from './render.js';
 import resources from './locales/index.js';
 
 export default () => {
+  const elements = {
+    input: document.querySelector('.form-control'),
+    form: document.querySelector('.rss-form'),
+    feedback: document.querySelector('.feedback'),
+    button: document.querySelector('.btn'),
+    modal: document.querySelector('#modal'),
+    feeds: document.querySelector('#feeds'),
+    posts: document.querySelector('.posts'),
+    readLink: document.querySelector('#readLink'),
+    modalTitle: document.querySelector('.modal-title'),
+    modalBody: document.querySelector('.modal-body'),
+    modalClose: document.querySelector('#close'),
+    closeButton: document.querySelector('#close-button'),
+  };
+
   const schema = yup.string('NotString').url('notUrl').required('notRequired');
-  const input = document.querySelector('.form-control');
-  const form = document.querySelector('.rss-form');
 
   i18next.init({
     lng: 'ru',
@@ -38,7 +51,7 @@ export default () => {
     },
   };
 
-  const watchedState = watchState(state);
+  const watchedState = watchState(elements, state);
 
   const validate = (url) => {
     const urls = watchedState.feeds.map((feed) => feed.url);
@@ -93,8 +106,8 @@ export default () => {
   };
 
   renderLanguage();
-  input.addEventListener('input', handleInput);
-  form.addEventListener('submit', handleSubmit);
+  elements.input.addEventListener('input', handleInput);
+  elements.form.addEventListener('submit', handleSubmit);
 
   const refreshFeeds = () => {
     const promises = watchedState.feeds.map((feed) => axios.get(getUrlWithProxy(feed.url))
