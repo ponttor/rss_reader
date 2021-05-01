@@ -1,6 +1,6 @@
 export default {
   translation: {
-    success: 'RSS has been added',
+    success: 'RSS has been downloaded',
     feeds: 'Feeds',
     posts: 'Posts',
     start: 'Start reading Rss now!',
