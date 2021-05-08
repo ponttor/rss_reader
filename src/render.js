@@ -11,8 +11,8 @@ const renderLanguage = () => {
 const watchState = (elements, state) => {
   const renderSuccessText = (el) => {
     el.input.classList.remove('is-invalid');
-    // el.feedback.textContent = i18next.t('success');
-    el.feedback.textContent = 'rss has been downloaded';
+    el.feedback.textContent = i18next.t('success');
+    // el.feedback.textContent = 'rss has been downloaded';
     el.feedback.classList.remove('text-danger');
     el.feedback.classList.remove('text-info');
     el.feedback.classList.add('text-success');

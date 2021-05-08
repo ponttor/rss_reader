@@ -1,7 +1,7 @@
 export default {
   translation: {
     feeds: 'Фиды',
-    success: 'загружен',
+    success: 'Rss успешно загружен',
     posts: 'Посты',
     start: 'Начните читать Rss сейчас!',
     example: 'Например, https://ru.hexlet.io/lessons.rss',
