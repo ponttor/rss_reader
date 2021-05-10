@@ -66,7 +66,7 @@ export default () => {
     }
   };
 
-  const getUrlWithProxy = (url) => `https://hexlet-allorigins.herokuapp.com/raw?url=${url}&disableCache=true`;
+  const getUrlWithProxy = (url) => `https://hexlet-allorigins.herokuapp.com/get?url=${url}&disableCache=true`;
 
   const handleInput = (e) => {
     e.preventDefault();
