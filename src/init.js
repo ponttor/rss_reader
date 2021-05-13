@@ -66,7 +66,7 @@ export default () => {
     }
   };
 
-  const getUrlWithProxy = (url) => `https://hexlet-allorigins.herokuapp.com/get?url=${url}&disableCache=true`;
+  const getUrlWithProxy = (url) => `https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${url}`;
 
   const handleInput = (e) => {
     e.preventDefault();
@@ -85,7 +85,7 @@ export default () => {
     const url = getUrlWithProxy(state.form.fields.url);
     axios.get(url)
       .then((response) => {
-        const data = parse(response.data);
+        const data = parse(response.data.contents);
         const feed = {
           description: data.description,
           url: state.form.fields.url,
