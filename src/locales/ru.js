@@ -14,7 +14,7 @@ export default {
     notUrl: 'Введите корректный url',
     notRequired: 'Введите корректный url',
     theSame: 'Rss уже существует',
-    parserError: 'Не удалось извлечь Rss, введите валидный url',
+    parserError: 'Ссылка должна быть валидным URL',
     axiosError: 'Ошибка сети',
   },
 };
