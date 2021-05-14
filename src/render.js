@@ -100,7 +100,11 @@ const watchState = (elements, state) => {
   const renderLoadingError = (el, stateValue) => {
     el.input.classList.add('is-invalid', true);
     el.feedback.classList.add('text-danger');
-    el.feedback.textContent = i18next.t(`${stateValue.loadingProcess.error}`);
+    if (stateValue.loadingProcess.error === 'network Error') {
+      el.feedback.textContent = i18next.t('networkError');
+    } else {
+      el.feedback.textContent = i18next.t(`${stateValue.loadingProcess.error}`);
+    }
     el.button.removeAttribute('disabled');
   };
 

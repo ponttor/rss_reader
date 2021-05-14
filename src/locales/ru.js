@@ -15,6 +15,6 @@ export default {
     notRequired: 'Ссылка должна быть валидным URL',
     theSame: 'Rss уже существует',
     parserError: 'Ресурс не содержит валидный RSS',
-    axiosError: 'Ошибка сети',
+    networkError: 'Ошибка сети',
   },
 };
