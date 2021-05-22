@@ -12,7 +12,7 @@ export default () => {
     input: document.querySelector('.form-control'),
     form: document.querySelector('.rss-form'),
     feedback: document.querySelector('.feedback'),
-    button: document.querySelector('.btn'),
+    button: document.querySelector('[name="add"]'),
     modal: document.querySelector('#modal'),
     feeds: document.querySelector('#feeds'),
     posts: document.querySelector('.posts'),

@@ -97,7 +97,8 @@ const watchState = (elements, state) => {
     el.input.classList.add('is-invalid', true);
     el.feedback.classList.add('text-danger');
     el.feedback.textContent = i18next.t(`${stateValue.form.error}`);
-    // el.button.removeAttribute('disabled');
+    el.input.removeAttribute('readonly');
+    el.button.removeAttribute('disabled');
   };
 
   const renderLoadingError = (el, stateValue) => {
@@ -109,7 +110,8 @@ const watchState = (elements, state) => {
     } else {
       el.feedback.textContent = i18next.t('networkError');
     }
-    // el.button.removeAttribute('disabled');
+    el.input.removeAttribute('readonly');
+    el.button.removeAttribute('disabled');
   };
 
   const router = (value, stateValue) => {
