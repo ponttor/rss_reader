@@ -18,9 +18,11 @@ const watchState = (elements, state) => {
     el.input.value = '';
     el.input.focus();
     el.button.removeAttribute('disabled');
+    el.input.removeAttribute('readonly');
   };
 
   const renderSendingData = (el) => {
+    el.input.setAttribute('readonly', true);
     el.button.setAttribute('disabled', true);
     el.feedback.classList.remove('text-danger');
     el.feedback.classList.remove('text-success');
@@ -100,12 +102,6 @@ const watchState = (elements, state) => {
   const renderLoadingError = (el, stateValue) => {
     el.input.classList.add('is-invalid', true);
     el.feedback.classList.add('text-danger');
-    //   if (stateValue.loadingProcess.error === 'Network Error') {
-    //     el.feedback.textContent = i18next.t('networkError');
-    //   } else {
-    //     el.feedback.textContent = i18next.t(`${stateValue.loadingProcess.error}`);
-    //   }
-    //   el.button.removeAttribute('disabled');
     if ((i18next.t(`${stateValue.loadingProcess.error}`)) && (stateValue.loadingProcess.error !== 'Network Error')) {
       el.feedback.textContent = i18next.t(`${stateValue.loadingProcess.error}`);
     } else {
