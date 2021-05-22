@@ -93,13 +93,15 @@ const watchState = (elements, state) => {
   };
 
   const renderFormError = (el, stateValue) => {
+    el.button.setAttribute('disabled', true);
     el.input.classList.add('is-invalid', true);
     el.feedback.classList.add('text-danger');
     el.feedback.textContent = i18next.t(`${stateValue.form.error}`);
-    el.button.removeAttribute('disabled');
+    // el.button.removeAttribute('disabled');
   };
 
   const renderLoadingError = (el, stateValue) => {
+    el.button.setAttribute('disabled', true);
     el.input.classList.add('is-invalid', true);
     el.feedback.classList.add('text-danger');
     if ((i18next.t(`${stateValue.loadingProcess.error}`)) && (stateValue.loadingProcess.error !== 'Network Error')) {
@@ -107,7 +109,7 @@ const watchState = (elements, state) => {
     } else {
       el.feedback.textContent = i18next.t('networkError');
     }
-    el.button.removeAttribute('disabled');
+    // el.button.removeAttribute('disabled');
   };
 
   const router = (value, stateValue) => {
