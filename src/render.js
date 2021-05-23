@@ -46,7 +46,7 @@ const watchState = (elements, state) => {
       id, title, link,
     }) => {
       const resultButtons = `<li class="list-group-item d-flex justify-content-between align-itemsstart">
-    <a href="${link}" class="font-weight-bold" target="_blank">${title}</a>
+    <a href="${link}" class="font-weight-bold" data-id-text=${id} target="_blank">${title}</a>
     <button id = "details" data-toggle="modal" data-target="#modal" 
     class="btn btn-primary btn-sm pull-right" data-id=${id}>Просмотр</button></span></li>`;
       return resultButtons;
@@ -56,10 +56,12 @@ const watchState = (elements, state) => {
       id, title, link, description,
     }) => {
       const selectedButton = document.querySelector(`[data-id="${id}"]`);
+      const selectedText = document.querySelector(`[data-id-text="${id}"]`);
       selectedButton.addEventListener('click', (e) => {
         e.preventDefault();
 
         el.readLink.setAttribute('href', `${link}`);
+        selectedText.classList.remove('font-weight-bold');
         el.modal.classList.remove('fade');
         el.modal.style.display = 'block';
         el.modalTitle.textContent = `${title}`;
