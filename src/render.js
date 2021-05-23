@@ -93,7 +93,6 @@ const watchState = (elements, state) => {
   };
 
   const renderFormError = (el, stateValue) => {
-    el.button.setAttribute('disabled', true);
     el.input.classList.add('is-invalid', true);
     el.feedback.classList.add('text-danger');
     el.feedback.textContent = i18next.t(`${stateValue.form.error}`);
@@ -102,7 +101,6 @@ const watchState = (elements, state) => {
   };
 
   const renderLoadingError = (el, stateValue) => {
-    el.button.setAttribute('disabled', true);
     el.input.classList.add('is-invalid', true);
     el.feedback.classList.add('text-danger');
     if ((i18next.t(`${stateValue.loadingProcess.error}`)) && (stateValue.loadingProcess.error !== 'Network Error')) {
