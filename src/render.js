@@ -48,7 +48,7 @@ const watchState = (elements, state) => {
       const resultButtons = `<li class="list-group-item d-flex justify-content-between align-itemsstart">
     <a href="${link}" class="font-weight-bold" target="_blank">${title}</a>
     <button id = "details" data-toggle="modal" data-target="#modal" 
-    class="btn btn-primary btn-sm pull-right" data-id=${id}>Подробнее</button></span></li>`;
+    class="btn btn-primary btn-sm pull-right" data-id=${id}>Просмотр</button></span></li>`;
       return resultButtons;
     }).join('')}</ul>`;
     el.posts.innerHTML = `<h3>${i18next.t('posts')}</h3>${htmlposts}`;
