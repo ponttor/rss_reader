@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import 'bootstrap';
 import './_custom.scss';
 import axios from 'axios';
 import _ from 'lodash';
@@ -47,11 +48,19 @@ export default () => {
       error: null,
     },
     ui: {
-      post: null,
+      postId: null,
+      seenPosts: new Set(),
     },
   };
 
-  const watchedState = watchState(elements, state);
+  const watchedState = watchState(state);
+  const getUrlWithProxy = (url) => {
+    const newUrl = new URL('/get', 'https://hexlet-allorigins.herokuapp.com');
+    newUrl.searchParams.set('disableCache', 'true');
+
+    newUrl.searchParams.set('url', url);
+    return newUrl.toString();
+  };
 
   const validate = (url) => {
     const urls = watchedState.feeds.map((feed) => feed.url);
@@ -66,13 +75,20 @@ export default () => {
     }
   };
 
-  const getUrlWithProxy = (url) => `https://hexlet-allorigins.herokuapp.com/get?disableCache=true&url=${url}`;
-
   const handleInput = (e) => {
     e.preventDefault();
     watchedState.form.processState = 'filling';
     watchedState.form.fields.url = e.target.value;
     validate(watchedState.form.fields.url);
+  };
+
+  const getErrorType = (error) => {
+    if (error.isAxiosError) {
+      return 'networkError';
+    } if (error.isParseError) {
+      return 'parseError';
+    }
+    return 'unknownError';
   };
 
   const handleSubmit = (e) => {
@@ -83,6 +99,7 @@ export default () => {
       return;
     }
     const url = getUrlWithProxy(state.form.fields.url);
+
     axios.get(url)
       .then((response) => {
         const data = parse(response.data.contents);
@@ -99,7 +116,7 @@ export default () => {
         watchedState.form.error = null;
       })
       .catch((error) => {
-        state.loadingProcess.error = error.message;
+        state.loadingProcess.error = getErrorType(error);
         watchedState.loadingProcess.status = 'loadingError';
         watchedState.form.error = null;
       });
@@ -108,20 +125,34 @@ export default () => {
   renderLanguage();
   elements.input.addEventListener('input', handleInput);
   elements.form.addEventListener('submit', handleSubmit);
+  const refreshTime = 5000;
 
   const refreshFeeds = () => {
     const promises = watchedState.feeds.map((feed) => axios.get(getUrlWithProxy(feed.url))
       .then((response) => {
-        const parsedRss = parse(response.data);
+        const parsedRss = parse(response.data.contents);
         const result = _.differenceWith(parsedRss.items,
           watchedState.posts, (a, b) => a.title === b.title);
+          console.log(result);
         const posts = result.map((item) => ({ id: _.uniqueId(), ...item, feedId: feed.id }));
         watchedState.posts.unshift(...posts);
       }).catch(_.noop));
     Promise.all(promises)
       .finally(() => {
-        setTimeout(refreshFeeds, 5000);
+        setTimeout(refreshFeeds, refreshTime);
       });
   };
-  setTimeout(refreshFeeds, 5000);
+  setTimeout(refreshFeeds, refreshTime);
+  // const seenPosts = new Set();
+  elements.posts.addEventListener('click', (e) => {
+    if (!('id' in e.target.dataset)) {
+      return;
+    }
+    // watchedState.ui.postId = e.target.dataset.id;
+    // watchedState.ui.seenPosts.push(e.target.dataset.id); // set js - множество
+    // seenPosts.add(e.target.dataset.id);
+    // watchedState.ui.seenPosts = seenPosts;
+    watchedState.ui.seenPosts.add(e.target.dataset.id);
+    console.log(watchedState.ui.seenPosts);
+  });
 };

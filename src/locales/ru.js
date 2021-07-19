@@ -16,5 +16,6 @@ export default {
     theSame: 'Rss уже существует',
     parserError: 'Ресурс не содержит валидный RSS',
     networkError: 'Ошибка сети',
+    watch: 'Просмотр',
   },
 };

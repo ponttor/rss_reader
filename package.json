@@ -50,12 +50,15 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
+    "@popperjs/core": "^2.9.2",
     "autoprefixer": "^10.2.5",
     "axios": "^0.21.1",
     "bootstrap": "^4.6.0",
     "i18next": "^19.8.9",
+    "jquery": "^3.6.0",
     "lodash": "^4.17.20",
     "on-change": "^2.2.3",
+    "popper.js": "^1.16.1",
     "yup": "^0.32.8"
   }
 }

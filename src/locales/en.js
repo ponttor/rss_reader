@@ -15,6 +15,7 @@ export default {
     notRequired: 'Url should be valid',
     theSame: 'Rss is already downloaded',
     parserError: 'There is no valid Rss, plase enter correct url',
-    axiosError: 'Net error',
+    networkError: 'Net error',
+    watch: 'Watch',
   },
 };
