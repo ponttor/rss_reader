@@ -60,11 +60,9 @@ const watchState = (state) => {
     const listPosts = posts.map(({
       id, title, link,
     }) => {
-      const className = seenPosts.includes(id) ? 'fw-normal link-secondary' : 'fw-bold';
-      // const className = seenPosts.includes(id) ? 'fw-bold' : 'fw-bold';
-
+      const className = seenPosts.has(id) ? 'fw-normal link-secondary' : 'fw-bold';
       const resultButtons = `<li class="list-group-item d-flex justify-content-between align-itemsstart">
-    <a href="${link}" class="${className}" data-id-text="${id}" target="_blank">${title}</a>
+    <a href="${link}" class="${className}" data-id="${id}" data-id-text="${id}" target="_blank">${title}</a>
     <button id = "details" data-toggle="modal" data-target="#modal" 
     class="btn btn-primary btn-sm pull-right" data-id=${id}>${i18next.t('watch')}</button></span></li>`;
       return resultButtons;
@@ -83,7 +81,6 @@ const watchState = (state) => {
     } = stateValue.posts
       .find((post) => post.id === stateValue.ui.postId);
     const selectedText = document.querySelector(`[data-id-text="${id}"]`);
-
     elements.readLink.setAttribute('href', `${link}`);
     selectedText.classList.remove('font-weight-bold');
     elements.modalTitle.textContent = `${title}`;

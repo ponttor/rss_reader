@@ -133,7 +133,6 @@ export default () => {
         const parsedRss = parse(response.data.contents);
         const result = _.differenceWith(parsedRss.items,
           watchedState.posts, (a, b) => a.title === b.title);
-          console.log(result);
         const posts = result.map((item) => ({ id: _.uniqueId(), ...item, feedId: feed.id }));
         watchedState.posts.unshift(...posts);
       }).catch(_.noop));
@@ -143,16 +142,11 @@ export default () => {
       });
   };
   setTimeout(refreshFeeds, refreshTime);
-  // const seenPosts = new Set();
   elements.posts.addEventListener('click', (e) => {
     if (!('id' in e.target.dataset)) {
       return;
     }
-    // watchedState.ui.postId = e.target.dataset.id;
-    // watchedState.ui.seenPosts.push(e.target.dataset.id); // set js - множество
-    // seenPosts.add(e.target.dataset.id);
-    // watchedState.ui.seenPosts = seenPosts;
+    watchedState.ui.postId = e.target.dataset.id;
     watchedState.ui.seenPosts.add(e.target.dataset.id);
-    console.log(watchedState.ui.seenPosts);
   });
 };
