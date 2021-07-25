@@ -1,4 +1,4 @@
-### RSS Feed
+## RSS Feed
 
 [![Actions Status](https://github.com/ponttor/frontend-project-lvl3/workflows/hexlet-check/badge.svg)](https://github.com/ponttor/frontend-project-lvl3/actions)
 
