@@ -3,6 +3,7 @@ import i18next from 'i18next';
 import onChange from 'on-change';
 
 const elements = {
+  // title: document.querySelectorAll('.display-3'),
   input: document.querySelector('.form-control'),
   form: document.querySelector('.rss-form'),
   feedback: document.querySelector('.feedback'),
@@ -19,6 +20,7 @@ const elements = {
 
 const renderLanguage = () => {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
+    console.log(el.dataset);
     el.textContent = i18next.t(`${el.dataset.i18n}`);
   });
 };
@@ -63,7 +65,7 @@ const watchState = (state) => {
       const className = seenPosts.has(id) ? 'fw-normal link-secondary' : 'fw-bold';
       const resultButtons = `<li class="list-group-item d-flex justify-content-between align-itemsstart">
     <a href="${link}" class="${className}" data-id="${id}" data-id-text="${id}" target="_blank">${title}</a>
-    <button id = "details" data-toggle="modal" data-target="#modal" 
+    <button id = "details" data-bs-toggle="modal" data-bs-target="#modal" 
     class="btn btn-primary btn-sm pull-right" data-id=${id}>${i18next.t('watch')}</button></span></li>`;
       return resultButtons;
     }).join('');

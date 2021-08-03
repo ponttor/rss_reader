@@ -53,7 +53,7 @@
     "@popperjs/core": "^2.9.2",
     "autoprefixer": "^10.2.5",
     "axios": "^0.21.1",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.0.2",
     "i18next": "^19.8.9",
     "jquery": "^3.6.0",
     "lodash": "^4.17.20",
