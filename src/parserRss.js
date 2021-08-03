@@ -2,9 +2,9 @@ export default (rss) => {
   const parser = new DOMParser();
   const rssDoc = parser.parseFromString(rss, 'text/xml');
   if (rssDoc.querySelector('parsererror') !== null) {
-    const error = Error('parserError');
+    const error = new Error('parserError');
     error.isParsingError = true;
-    throw Error('parserError');
+    throw error;
   }
   const title = rssDoc.querySelector('title');
   const description = rssDoc.querySelector('description');

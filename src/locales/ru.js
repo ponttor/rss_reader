@@ -17,7 +17,7 @@ export default {
     notUrl: 'Ссылка должна быть валидным URL',
     notRequired: 'Ссылка должна быть валидным URL',
     theSame: 'Rss уже существует',
-    parserError: 'Ресурс не содержит валидный RSS',
+    parsingError: 'Ресурс не содержит валидный RSS',
     networkError: 'Ошибка сети',
     watch: 'Просмотр',
   },

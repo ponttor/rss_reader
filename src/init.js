@@ -85,8 +85,8 @@ export default () => {
   const getErrorType = (error) => {
     if (error.isAxiosError) {
       return 'networkError';
-    } if (error.isParseError) {
-      return 'parseError';
+    } if (error.isParsingError) {
+      return 'parsingError';
     }
     return 'unknownError';
   };
@@ -143,10 +143,10 @@ export default () => {
   };
   setTimeout(refreshFeeds, refreshTime);
   elements.posts.addEventListener('click', (e) => {
-    if (!('id' in e.target.dataset)) {
+    if (!('id' in e.currentTarget.dataset)) {
       return;
     }
-    watchedState.ui.postId = e.target.dataset.id;
-    watchedState.ui.seenPosts.add(e.target.dataset.id);
+    watchedState.ui.postId = e.currentTarget.dataset.id;
+    watchedState.ui.seenPosts.add(e.currentTarget.dataset.id);
   });
 };

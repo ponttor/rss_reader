@@ -125,6 +125,11 @@ const watchState = (state, elements) => {
         break;
       }
 
+      case 'ui.seenPosts': {
+        renderPosts(state);
+        break;
+      }
+
       default:
         break;
     }
