@@ -3,7 +3,6 @@ import i18next from 'i18next';
 import onChange from 'on-change';
 
 const elements = {
-  // title: document.querySelectorAll('.display-3'),
   input: document.querySelector('.form-control'),
   form: document.querySelector('.rss-form'),
   feedback: document.querySelector('.feedback'),
@@ -20,7 +19,6 @@ const elements = {
 
 const renderLanguage = () => {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
-    console.log(el.dataset);
     el.textContent = i18next.t(`${el.dataset.i18n}`);
   });
 };
