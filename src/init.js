@@ -53,7 +53,7 @@ export default () => {
     },
   };
 
-  const watchedState = watchState(state);
+  const watchedState = watchState(state, elements);
   const getUrlWithProxy = (url) => {
     const newUrl = new URL('/get', 'https://hexlet-allorigins.herokuapp.com');
     newUrl.searchParams.set('disableCache', 'true');

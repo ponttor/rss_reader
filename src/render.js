@@ -2,28 +2,13 @@
 import i18next from 'i18next';
 import onChange from 'on-change';
 
-const elements = {
-  input: document.querySelector('.form-control'),
-  form: document.querySelector('.rss-form'),
-  feedback: document.querySelector('.feedback'),
-  button: document.querySelector('[name="add"]'),
-  modal: document.querySelector('#modal'),
-  feeds: document.querySelector('#feeds'),
-  posts: document.querySelector('.posts'),
-  readLink: document.querySelector('#readLink'),
-  modalTitle: document.querySelector('.modal-title'),
-  modalBody: document.querySelector('.modal-body'),
-  modalClose: document.querySelector('#close'),
-  closeButton: document.querySelector('#close-button'),
-};
-
 const renderLanguage = () => {
   document.querySelectorAll('[data-i18n]').forEach((el) => {
     el.textContent = i18next.t(`${el.dataset.i18n}`);
   });
 };
 
-const watchState = (state) => {
+const watchState = (state, elements) => {
   const renderSuccessText = () => {
     elements.input.classList.remove('is-invalid');
     elements.feedback.textContent = i18next.t('success');
