@@ -143,10 +143,10 @@ export default () => {
   };
   setTimeout(refreshFeeds, refreshTime);
   elements.posts.addEventListener('click', (e) => {
-    if (!('id' in e.currentTarget.dataset)) {
+    if (!('id' in e.target.dataset)) {
       return;
     }
-    watchedState.ui.postId = e.currentTarget.dataset.id;
-    watchedState.ui.seenPosts.add(e.currentTarget.dataset.id);
+    watchedState.ui.postId = e.target.dataset.id;
+    watchedState.ui.seenPosts.add(e.target.dataset.id);
   });
 };
