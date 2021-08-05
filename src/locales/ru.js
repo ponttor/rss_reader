@@ -1,7 +1,7 @@
 export default {
   translation: {
     button: 'Добавить',
-    lable: 'Ссылка RSS',
+    label: 'Ссылка RSS',
     title: 'RSS агрегатор',
     feeds: 'Фиды',
     success: 'RSS успешно загружен',

@@ -1,6 +1,5 @@
 import * as yup from 'yup';
 import 'bootstrap';
-import './_custom.scss';
 import axios from 'axios';
 import _ from 'lodash';
 import i18next from 'i18next';

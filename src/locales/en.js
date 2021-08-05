@@ -1,7 +1,7 @@
 export default {
   translation: {
     button: 'Add',
-    lable: 'RSS link',
+    label: 'RSS link',
     title: 'RSS reader',
     success: 'RSS has been downloaded',
     feeds: 'Feeds',

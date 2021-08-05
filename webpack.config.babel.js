@@ -28,6 +28,9 @@ module.exports = {
         }, {
           // compiles Sass to CSS
           loader: 'sass-loader',
+        }, {
+          // compiles Sass to CSS
+          loader: 'postcss-loader',
         }],
       },
     ],
