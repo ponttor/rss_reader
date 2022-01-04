@@ -26,7 +26,7 @@ export default () => {
   const schema = yup.string('NotString').url('notUrl').required('notRequired');
 
   i18next.init({
-    lng: 'ru',
+    lng: 'en',
     debug: true,
     resources,
   });
